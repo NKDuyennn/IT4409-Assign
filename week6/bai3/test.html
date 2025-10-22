@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Paradise - Comic Book Store</title>
+    <!-- Liên kết file CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header chứa tên cửa hàng và menu điều hướng -->
+    <header>
+        <h1>Manga Paradise</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Phần nội dung chính -->
+    <main>
+        <!-- Phần giới thiệu về cửa hàng -->
+        <section>
+            <h2>Welcome to Manga Paradise!</h2>
+            <p>Your ultimate destination for the best manga and comic books. We offer a wide selection of popular series, rare editions, and exclusive releases.</p>
+        </section>
+
+        <!-- Phần tìm kiếm và nút thêm sản phẩm -->
+        <section>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="searchInput" placeholder="Search for manga...">
+                <button id="searchBtn">Search</button>
+                <button id="addProductBtn">Add New Product</button>
+            </div>
+        </section>
+
+        <!-- Form thêm sản phẩm (ẩn mặc định) -->
+        <section>
+            <form id="addProductForm" class="hidden">
+                <h3>Add New Product</h3>
+                <div>
+                    <label for="newName">Product Name:</label>
+                    <input type="text" id="newName" required>
+                </div>
+
+                <div>
+                    <label for="newPrice">Price:</label>
+                    <input type="number" id="newPrice" required min="1">
+                </div>
+
+                <div>
+                    <label for="newDesc">Description:</label>
+                    <textarea id="newDesc" rows="3"></textarea>
+                </div>
+
+                <button type="submit">Add</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+                <p id="errorMsg" style="color:red; margin-top: 10px;"></p>
+            </form>
+        </section>
+
+        <!-- Phần danh sách sản phẩm -->
+        <section id="product-list">
+            <h2>Featured Products</h2>
+            
+            <!-- Sản phẩm 1 -->
+            <article class="product-item">
+                <img src="https://via.placeholder.com/200x300/FF6B6B/FFFFFF?text=One+Piece" alt="One Piece Volume 1">
+                <h3 class="product-name">One Piece Volume 1</h3>
+                <p class="product-desc">Join Monkey D. Luffy on his epic adventure to become the King of the Pirates! The beginning of the legendary series.</p>
+                <p class="product-price">Price: 50000₫</p>
+            </article>
+
+            <!-- Sản phẩm 2 -->
+            <article class="product-item">
+                <img src="https://via.placeholder.com/200x300/4ECDC4/FFFFFF?text=Naruto" alt="Naruto Volume 1">
+                <h3 class="product-name">Naruto Volume 1</h3>
+                <p class="product-desc">Follow the journey of Naruto Uzumaki, a young ninja who dreams of becoming the Hokage of his village.</p>
+                <p class="product-price">Price: 45000₫</p>
+            </article>
+
+            <!-- Sản phẩm 3 -->
+            <article class="product-item">
+                <img src="https://via.placeholder.com/200x300/95E1D3/FFFFFF?text=Attack+on+Titan" alt="Attack on Titan Volume 1">
+                <h3 class="product-name">Attack on Titan Volume 1</h3>
+                <p class="product-desc">In a world where humanity lives within walls to protect themselves from Titans, Eren Yeager vows to eliminate them all.</p>
+                <p class="product-price">Price: 55000₫</p>
+            </article>
+        </section>
+
+        <!-- Form liên hệ/đăng ký nhận tin -->
+        <section>
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <div>
+                    <label for="contactName">Name:</label>
+                    <input type="text" id="contactName" name="name" required>
+                </div>
+
+                <div>
+                    <label for="contactEmail">Email:</label>
+                    <input type="email" id="contactEmail" name="email" required>
+                </div>
+
+                <div>
+                    <label for="contactMessage">Message:</label>
+                    <textarea id="contactMessage" name="message" rows="4" required></textarea>
+                </div>
+
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer chứa thông tin cửa hàng -->
+    <footer>
+        <p>&copy; 2025 Manga Paradise. All rights reserved.</p>
+        <p>Address: 123 Manga Street, Hanoi, Vietnam</p>
+        <p>Phone: +84 123 456 789</p>
+    </footer>
+
+    <!-- Liên kết file JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
