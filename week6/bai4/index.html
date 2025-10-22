@@ -44,23 +44,36 @@
         <section>
             <form id="addProductForm" class="hidden">
                 <h3>Add New Product</h3>
+                
+                <!-- Trường nhập tên sản phẩm -->
                 <div>
                     <label for="newName">Product Name:</label>
-                    <input type="text" id="newName" required>
+                    <input type="text" id="newName" required placeholder="Enter product name">
                 </div>
 
+                <!-- Trường nhập giá sản phẩm -->
                 <div>
-                    <label for="newPrice">Price:</label>
-                    <input type="number" id="newPrice" required min="1">
+                    <label for="newPrice">Price (VND):</label>
+                    <input type="number" id="newPrice" required min="1" placeholder="Enter price">
                 </div>
 
+                <!-- Trường nhập mô tả sản phẩm -->
                 <div>
                     <label for="newDesc">Description:</label>
-                    <textarea id="newDesc" rows="3"></textarea>
+                    <textarea id="newDesc" rows="3" placeholder="Enter product description (optional)"></textarea>
                 </div>
 
-                <button type="submit">Add</button>
+                <!-- Trường nhập URL hình ảnh sản phẩm (tuỳ chọn) -->
+                <div>
+                    <label for="newImage">Image URL (optional):</label>
+                    <input type="text" id="newImage" placeholder="https://example.com/image.jpg">
+                </div>
+
+                <!-- Nút submit và cancel -->
+                <button type="submit">Add Product</button>
                 <button type="button" id="cancelBtn">Cancel</button>
+                
+                <!-- Thẻ p để hiển thị thông báo lỗi -->
                 <p id="errorMsg" style="color:red; margin-top: 10px;"></p>
             </form>
         </section>
@@ -123,16 +136,22 @@
             <h2>Contact Us</h2>
             <form id="contactForm">
                 <!-- Trường nhập tên -->
-                <label for="userName">Name:</label>
-                <input type="text" id="userName" name="userName" required placeholder="Enter your name">
+                <div>
+                    <label for="userName">Name:</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Enter your name">
+                </div>
 
                 <!-- Trường nhập email -->
-                <label for="userEmail">Email:</label>
-                <input type="email" id="userEmail" name="userEmail" required placeholder="Enter your email">
+                <div>
+                    <label for="userEmail">Email:</label>
+                    <input type="email" id="userEmail" name="userEmail" required placeholder="Enter your email">
+                </div>
 
                 <!-- Trường nhập nội dung tin nhắn -->
-                <label for="userMessage">Message:</label>
-                <textarea id="userMessage" name="userMessage" rows="5" required placeholder="Enter your message"></textarea>
+                <div>
+                    <label for="userMessage">Message:</label>
+                    <textarea id="userMessage" name="userMessage" rows="5" required placeholder="Enter your message"></textarea>
+                </div>
 
                 <!-- Nút gửi form -->
                 <button type="submit">Send</button>
