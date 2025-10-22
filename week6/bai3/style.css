@@ -78,6 +78,41 @@ main > section h2 {
     padding-bottom: 10px;
 }
 
+/* Styling cho ô tìm kiếm */
+#searchInput {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#searchBtn,
+#addProductBtn {
+    background-color: #e74c3c;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#searchBtn:hover,
+#addProductBtn:hover {
+    background-color: #c0392b;
+}
+
+#addProductBtn {
+    background-color: #27ae60;
+}
+
+#addProductBtn:hover {
+    background-color: #229954;
+}
+
 /* Styling cho danh sách sản phẩm - sử dụng Flexbox */
 #product-list {
     display: flex;
