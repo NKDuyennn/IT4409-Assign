@@ -304,7 +304,7 @@ useEffect(() => {
 
 ## 🎓 Học Tập Thêm
 
-Sau khi hoàn thành project này, bạn có thể mở rộng với:
+Sau khi hoàn thành project này, có thể mở rộng với:
 
 - 🔐 Authentication
 - 🌐 React Router (Multi-page)
@@ -315,14 +315,10 @@ Sau khi hoàn thành project này, bạn có thể mở rộng với:
 
 ## 👨‍💻 Tác Giả
 
-- **Sinh viên**: [Tên của bạn]
+- **Sinh viên**: Nguyen Kieu Duyen
 - **Lớp**: IT4409
 - **Trường**: Đại học Bách Khoa Hà Nội
 
 ## 📄 License
 
 MIT License - Tự do sử dụng cho mục đích học tập
-
----
-
-⭐ **Chúc bạn học tốt React!** ⭐
