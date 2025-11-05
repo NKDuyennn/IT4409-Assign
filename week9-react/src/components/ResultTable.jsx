@@ -1,30 +1,46 @@
 import React, { useState, useEffect } from 'react';
 
-function ResultTable({ keyword, user, onAdded }) {
+function ResultTable({ keyword, user, onAdded, resetTrigger }) {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null);
 
-  // 1. Tải dữ liệu từ API khi component mount
+  // 1. Tải dữ liệu từ API và localStorage khi component mount
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Lỗi tải dữ liệu:", err);
-        setLoading(false);
-      });
-  }, []);
+    setLoading(true);
+    // Kiểm tra xem có dữ liệu trong localStorage không
+    const savedUsers = localStorage.getItem('users');
+    
+    if (savedUsers) {
+      // Nếu có dữ liệu đã lưu, sử dụng dữ liệu đó
+      setUsers(JSON.parse(savedUsers));
+      setLoading(false);
+    } else {
+      // Nếu chưa có, tải từ API
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then(res => res.json())
+        .then(data => {
+          setUsers(data);
+          localStorage.setItem('users', JSON.stringify(data));
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error("Lỗi tải dữ liệu:", err);
+          setLoading(false);
+        });
+    }
+  }, [resetTrigger]);
 
   // 2. Thêm user mới vào danh sách
   useEffect(() => {
     if (user) {
-      // Tạo ID dựa trên timestamp để tránh trùng lặp
-      const newId = Date.now();
-      setUsers(prev => [...prev, { ...user, id: newId }]);
+      // Tạo ID tuần tự từ ID lớn nhất hiện có + 1
+      const maxId = users.length > 0 ? Math.max(...users.map(u => u.id)) : 0;
+      const newId = maxId + 1;
+      
+      const newUsers = [...users, { ...user, id: newId }];
+      setUsers(newUsers);
+      localStorage.setItem('users', JSON.stringify(newUsers));
       onAdded(); // Reset newUser về null
       alert("Thêm người dùng thành công!");
     }
@@ -39,7 +55,9 @@ function ResultTable({ keyword, user, onAdded }) {
   // 4. Hàm xóa user
   function removeUser(id) {
     if (window.confirm("Bạn có chắc muốn xóa?")) {
-      setUsers(prev => prev.filter(u => u.id !== id));
+      const newUsers = users.filter(u => u.id !== id);
+      setUsers(newUsers);
+      localStorage.setItem('users', JSON.stringify(newUsers));
     }
   }
 
@@ -69,9 +87,11 @@ function ResultTable({ keyword, user, onAdded }) {
       return;
     }
     
-    setUsers(prev => prev.map(u => 
+    const newUsers = users.map(u => 
       u.id === editing.id ? editing : u
-    ));
+    );
+    setUsers(newUsers);
+    localStorage.setItem('users', JSON.stringify(newUsers));
     setEditing(null);
     alert("Cập nhật thành công!");
   }
