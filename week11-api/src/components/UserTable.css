@@ -1,0 +1,79 @@
+.table-container {
+  overflow-x: auto;
+  border: 2px solid #000;
+  background: #fff;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.user-table thead {
+  background: #000;
+  color: #fff;
+}
+
+.user-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+  border-right: 2px solid #333;
+}
+
+.user-table th:last-child {
+  border-right: none;
+}
+
+.user-table td {
+  padding: 1rem;
+  border-top: 2px solid #000;
+  border-right: 2px solid #e0e0e0;
+  color: #000;
+}
+
+.user-table td:last-child {
+  border-right: none;
+}
+
+.user-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.user-table tbody tr:hover {
+  background: #f5f5f5;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .user-table th,
+  .user-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .btn-sm {
+    width: 100%;
+  }
+}
