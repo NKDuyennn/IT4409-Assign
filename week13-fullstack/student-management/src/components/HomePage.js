@@ -3,12 +3,19 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddStudentForm from './AddStudentForm';
 import StudentList from './StudentList';
+// ======== Bài 5: Bước 1 - Import component SearchBar ========
+import SearchBar from './SearchBar';
+// ======== Kết thúc Bài 5: Bước 1 ========
 
 function HomePage() {
   // ======== Bài 1: Bước 7 - State để lưu danh sách học sinh ========
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // ======== Bài 5: Bước 1 - State để lưu từ khóa tìm kiếm ========
+  const [searchTerm, setSearchTerm] = useState("");
+  // ======== Kết thúc Bài 5: Bước 1 ========
 
   // ======== Bài 1: Bước 7 - Fetch dữ liệu từ API khi component load ========
   useEffect(() => {
@@ -57,7 +64,20 @@ function HomePage() {
   };
   // ======== Kết thúc Bài 4: Bước 3 ========
 
-  // ======== Bài 1, Bài 2 & Bài 4 - Hiển thị giao diện với các components ========
+  // ======== Bài 5: Bước 2 - Lọc danh sách dựa trên từ khóa tìm kiếm ========
+  // Lọc trên client: Tìm kiếm không phân biệt hoa thường
+  const filteredStudents = students.filter(student =>
+    student.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // ======== Kết thúc Bài 5: Bước 2 ========
+
+  // ======== Bài 5: Bước 1 - Hàm xử lý thay đổi từ khóa tìm kiếm ========
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+  };
+  // ======== Kết thúc Bài 5: Bước 1 ========
+
+  // ======== Bài 1, Bài 2, Bài 4 & Bài 5 - Hiển thị giao diện với các components ========
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
       <h1>Quản lý Học sinh</h1>
@@ -66,14 +86,37 @@ function HomePage() {
       <AddStudentForm onStudentAdded={handleStudentAdded} />
       {/* ======== Kết thúc Bài 2: Bước 2 ======== */}
       
-      {/* ======== Bài 1: Bước 7 & Bài 4: Bước 2 - Sử dụng component StudentList với callback xóa ======== */}
+      {/* ======== Bài 5: Bước 1 & Bước 3 - Sử dụng component SearchBar ======== */}
+      <SearchBar 
+        searchTerm={searchTerm} 
+        onSearchChange={handleSearchChange} 
+      />
+      {/* ======== Kết thúc Bài 5: Bước 1 & Bước 3 ======== */}
+      
+      {/* ======== Bài 5: Bước 3 - Hiển thị số kết quả tìm kiếm ======== */}
+      {searchTerm && (
+        <div style={{ 
+          padding: '10px', 
+          backgroundColor: '#e7f3ff', 
+          borderRadius: '5px', 
+          marginBottom: '15px',
+          color: '#004085'
+        }}>
+          Tìm thấy <strong>{filteredStudents.length}</strong> học sinh 
+          {filteredStudents.length !== students.length && 
+            ` (từ tổng số ${students.length} học sinh)`}
+        </div>
+      )}
+      {/* ======== Kết thúc Bài 5: Bước 3 ======== */}
+      
+      {/* ======== Bài 1, Bài 4 & Bài 5: Bước 2 - Sử dụng component StudentList với danh sách đã lọc ======== */}
       <StudentList 
-        students={students} 
+        students={filteredStudents}
         loading={loading} 
         error={error} 
         onDelete={handleDelete} 
       />
-      {/* ======== Kết thúc Bài 1: Bước 7 & Bài 4: Bước 2 ======== */}
+      {/* ======== Kết thúc Bài 1, Bài 4 & Bài 5: Bước 2 ======== */}
     </div>
   );
 }
