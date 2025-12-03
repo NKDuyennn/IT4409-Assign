@@ -21,20 +21,14 @@ mongoose.connect('mongodb://localhost:27017/student_db')
   .then(() => console.log("✓ Đã kết nối MongoDB thành công"))
   .catch(err => console.error("✗ Lỗi kết nối MongoDB:", err));
 
-// ======== Bài 1: Bước 5 - Import model Student ========
-const Student = require('./models/Student');
+// ======== Bài 1: Bước 6 - Import routes từ file riêng ========
+// Import student routes
+const studentRoutes = require('./routes/studentRoutes');
 
-// ======== Bài 1: Bước 6 - Tạo API GET danh sách học sinh ========
-// Endpoint lấy danh sách tất cả học sinh
-app.get('/api/students', async (req, res) => {
-  try {
-    // Tìm tất cả học sinh trong database
-    const students = await Student.find();
-    res.json(students);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+// ======== Bài 1: Bước 6 - Sử dụng routes cho /api/students ========
+// Tất cả các route liên quan đến students sẽ được xử lý trong studentRoutes
+app.use('/api/students', studentRoutes);
+// ======== Kết thúc Bài 1: Bước 6 ========
 
 // Route mặc định để kiểm tra server
 app.get('/', (req, res) => {
