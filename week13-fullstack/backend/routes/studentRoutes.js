@@ -77,4 +77,32 @@ router.put('/:id', async (req, res) => {
 });
 // ======== Kết thúc Bài 3: Bước 1 ========
 
+// ======== Bài 4: Bước 1 - Tạo API xóa học sinh (HTTP DELETE) ========
+// Endpoint xóa học sinh theo ID
+// DELETE /api/students/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    
+    // Tìm và xóa học sinh theo ID
+    const deleted = await Student.findByIdAndDelete(id);
+    
+    // Kiểm tra nếu không tìm thấy học sinh với ID này
+    if (!deleted) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    
+    // Trả về thông báo thành công và ID của học sinh đã xóa
+    res.json({ 
+      message: "Đã xóa học sinh thành công", 
+      id: deleted._id,
+      name: deleted.name 
+    });
+  } catch (err) {
+    // Trả về lỗi nếu có vấn đề khi xóa
+    res.status(500).json({ error: err.message });
+  }
+});
+// ======== Kết thúc Bài 4: Bước 1 ========
+
 export default router;

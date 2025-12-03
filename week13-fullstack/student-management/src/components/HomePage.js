@@ -39,7 +39,25 @@ function HomePage() {
   };
   // ======== Kết thúc Bài 2: Bước 3 ========
 
-  // ======== Bài 1 & Bài 2 - Hiển thị giao diện với các components ========
+  // ======== Bài 4: Bước 3 - Gửi yêu cầu xóa từ frontend ========
+  const handleDelete = (id) => {
+    // Gửi DELETE request đến API backend
+    axios.delete(`http://localhost:5000/api/students/${id}`)
+      .then(res => {
+        console.log(res.data.message);
+        
+        // Cập nhật state: Lọc bỏ học sinh vừa xóa khỏi danh sách
+        // Cách này hiệu quả hơn là gọi lại API GET
+        setStudents(prevList => prevList.filter(student => student._id !== id));
+      })
+      .catch(err => {
+        console.error("Lỗi khi xóa:", err);
+        alert("Lỗi khi xóa học sinh. Vui lòng thử lại!");
+      });
+  };
+  // ======== Kết thúc Bài 4: Bước 3 ========
+
+  // ======== Bài 1, Bài 2 & Bài 4 - Hiển thị giao diện với các components ========
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
       <h1>Quản lý Học sinh</h1>
@@ -48,9 +66,14 @@ function HomePage() {
       <AddStudentForm onStudentAdded={handleStudentAdded} />
       {/* ======== Kết thúc Bài 2: Bước 2 ======== */}
       
-      {/* ======== Bài 1: Bước 7 - Sử dụng component StudentList ======== */}
-      <StudentList students={students} loading={loading} error={error} />
-      {/* ======== Kết thúc Bài 1: Bước 7 ======== */}
+      {/* ======== Bài 1: Bước 7 & Bài 4: Bước 2 - Sử dụng component StudentList với callback xóa ======== */}
+      <StudentList 
+        students={students} 
+        loading={loading} 
+        error={error} 
+        onDelete={handleDelete} 
+      />
+      {/* ======== Kết thúc Bài 1: Bước 7 & Bài 4: Bước 2 ======== */}
     </div>
   );
 }
