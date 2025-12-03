@@ -1,7 +1,7 @@
 // ======== Bài 1: Bước 6 - Tạo file routes riêng cho Student ========
-const express = require('express');
+import express from 'express';
+import Student from '../models/Student.js';
 const router = express.Router();
-const Student = require('../models/Student');
 
 // ======== Bài 1: Bước 6 - Tạo API GET danh sách học sinh ========
 // Endpoint lấy danh sách tất cả học sinh
@@ -33,4 +33,48 @@ router.post('/', async (req, res) => {
 });
 // ======== Kết thúc Bài 2: Bước 1 ========
 
-module.exports = router;
+// ======== Bài 3: Bước 1 - Tạo API GET chi tiết học sinh theo ID ========
+// Endpoint lấy thông tin chi tiết một học sinh
+// GET /api/students/:id
+router.get('/:id', async (req, res) => {
+  try {
+    // Tìm học sinh theo ID
+    const student = await Student.findById(req.params.id);
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    res.json(student);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+// ======== Kết thúc Bài 3: Bước 1 ========
+
+// ======== Bài 3: Bước 1 - Tạo API cập nhật học sinh (HTTP PUT) ========
+// Endpoint cập nhật thông tin học sinh theo ID
+// PUT /api/students/:id
+router.put('/:id', async (req, res) => {
+  try {
+    // Tìm và cập nhật document theo ID với dữ liệu mới (req.body)
+    // Option { new: true } để trả về document sau khi update
+    const updatedStu = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    
+    // Kiểm tra nếu không tìm thấy học sinh với ID này
+    if (!updatedStu) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+    
+    // Trả về học sinh đã được cập nhật
+    res.json(updatedStu);
+  } catch (err) {
+    // Trả về lỗi nếu dữ liệu không hợp lệ hoặc ID sai format
+    res.status(400).json({ error: err.message });
+  }
+});
+// ======== Kết thúc Bài 3: Bước 1 ========
+
+export default router;

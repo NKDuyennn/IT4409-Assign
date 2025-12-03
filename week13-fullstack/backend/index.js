@@ -1,8 +1,8 @@
 // ======== Bài 1: Bước 2 - Thiết lập máy chủ Express cơ bản ========
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 // Khởi tạo ứng dụng Express
 const app = express();
@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost:27017/student_db')
 
 // ======== Bài 1: Bước 6 - Import routes từ file riêng ========
 // Import student routes
-const studentRoutes = require('./routes/studentRoutes');
+import studentRoutes from './routes/studentRoutes.js';
 
 // ======== Bài 1: Bước 6 - Sử dụng routes cho /api/students ========
 // Tất cả các route liên quan đến students sẽ được xử lý trong studentRoutes

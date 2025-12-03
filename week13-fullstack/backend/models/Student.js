@@ -1,5 +1,5 @@
 // ======== Bài 1: Bước 5 - Tạo Mongoose Schema và Model cho Student ========
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // Định nghĩa schema cho Student với các trường: name, age, class
@@ -10,4 +10,4 @@ const studentSchema = new Schema({
 }, { collection: 'students' });
 
 // Export model Student để sử dụng trong các file khác
-module.exports = mongoose.model('Student', studentSchema);
+export default mongoose.model('Student', studentSchema);
